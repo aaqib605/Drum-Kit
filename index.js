@@ -5,12 +5,14 @@ for (let i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", function () {
     let key = this.textContent;
     makeSound(key);
+    buttonAnimation(key);
   });
 }
 
 // Detecting keypress
 document.addEventListener("keypress", function (e) {
   makeSound(e.key);
+  buttonAnimation(e.key);
 });
 
 function makeSound(key) {
@@ -37,4 +39,12 @@ function makeSound(key) {
       new Audio("sounds/kick-bass.mp3").play();
       break;
   }
+}
+
+function buttonAnimation(key) {
+  let activeButton = document.querySelector(`.${key}`);
+  activeButton.classList.add("pressed");
+  setTimeout(() => {
+    activeButton.classList.remove("pressed");
+  }, 0.5);
 }
